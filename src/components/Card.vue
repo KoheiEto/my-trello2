@@ -6,7 +6,7 @@
       ×
     </button>
       
-    <button @click="editCard">更新</button>
+    <!-- <button @click="editCard">更新</button> -->
         
     <div class="body">
       {{ body }}

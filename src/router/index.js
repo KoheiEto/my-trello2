@@ -1,15 +1,21 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Board from '../components/Board.vue'
+/* import Home from '../views/Home.vue' */
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Board',
+    name: 'board',
     component: Board
   },
+  /* {
+    path: '/board',
+    name: 'Board',
+    component: Board
+  } */
 ]
 
 const router = new VueRouter({

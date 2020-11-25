@@ -1,14 +1,14 @@
 <template>
   <div id="app">
-    <!-- <div id="nav">
-    <router-link to="/">Board</router-link>
-    </div> -->
+    <!-- <v-toolbar-title>Mytrello</v-toolbar-title> -->
     <router-view />
+    
   </div>
 </template>
 
 <script>
 /* import Board from './components/Board.vue'; */
+
 
 export default {
   name: 'App',
