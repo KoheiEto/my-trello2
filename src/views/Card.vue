@@ -1,6 +1,11 @@
 <template>
 
-  <div class="card">
+  <div>
+  <div class="card" v-for="(item, index) in cards"
+          :body="item.body"
+          :key="item.id"
+          :cardIndex="index"
+          :listIndex="listIndex">
     
     <button class="close-button" @click="removeCardFromList">
       ×
@@ -10,7 +15,6 @@
         
     <div class="body">
       {{ body }}
-      
     </div>
 
     <!-- <modal name="user-modal">
@@ -18,11 +22,15 @@
     </modal> -->
 
   </div>
+  </div>
 </template>
 
 <script>
   export default {
-    props: {
+    created() {
+    this.cards = this.$store.state.lists.cards;
+  },
+    /* props: {
       body: {
         type: String,
         required: true
@@ -34,6 +42,11 @@
       cardIndex: {
         type: Number,
         required: true
+      }
+    }, */
+    data() {
+      return {
+        cards: [],
       }
     },
     methods: {

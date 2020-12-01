@@ -7,7 +7,8 @@
            @focusin="startEditing"
            @focusout="finishEditing"
     />
-    <button type="submit" 
+    <button
+            type="submit" 
             class="add-button"
             v-if="isEditing || bodyExists"
     >
@@ -18,13 +19,19 @@
 
 <script>
 export default {
-  props: {
+  /* props: {
     listIndex: {
       type: Number,
       required: true,
     }
+  }, */
+  props: {
+    listId: {
+      type: Number,
+      required: true,
+    }
   },
-  data: function() {
+  data() {
     return {
       body: '',
       isEditing: false,
@@ -47,7 +54,7 @@ export default {
   },
   methods: {
     addCardToList: function() {
-      this.$store.dispatch('addCardToList', { body: this.body, listIndex: this.listIndex })
+      this.$store.dispatch('addCardToList', { id: this.listId, body: this.body })
       this.body = ''
     },
     startEditing() {

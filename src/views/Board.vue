@@ -17,20 +17,24 @@
       <main>
 
         <p class="info-line">All: {{ totalCardCount }} tasks</p>
-        <draggable class="list-index"
-                   @end="movingList"
-                   :list="lists">
-          <list v-for="(item, index) in lists"
-              :key="item.id"
-              :title="item.title"
-              :cards="item.cards"
+        
+          <draggable :animation="200">
+          
+            <List v-for="(item, index) in lists" :key="item.id" :title="item.title" :id="item.id"
               :listIndex="index"
-              @change="movingCard"
-          />
-          <list-add />
-        </draggable>
+             />
+
+             <!-- v-for="(item, index) in lists" :key="item.id" :title="item.title"
+              :list-index="index" -->
+          
+          <!-- :cards="item.cards" -->
+          <!-- @change="movingCard" -->
+          </draggable>
+
+        <ListAdd />
         
       </main>
+
       <!-- <button @click="editCard">更新</button> -->
 
       <!-- <button @click="show">更新</button>
@@ -50,49 +54,60 @@
 <script>
 import draggable from 'vuedraggable'
 import ListAdd from './ListAdd.vue'
-import List from './List'
-import { mapGetters, mapState } from 'vuex'
+import List from './List.vue'
+import { mapGetters, /* mapState */ } from 'vuex'
 import { mapActions } from "vuex";
-import firebase from 'firebase'
+//import firebase from 'firebase'
 //import VModal from 'vue-js-modal'
 
 
 export default {
+  created () {
+    //await this.showAddresses();
+    //this.fetchLists();
+    this.lists = this.$store.state.lists;
+  },
+  data () {
+    return {
+     lists: [], 
+    }
+  },
   components: {
     ListAdd,
     List,
     draggable,
   },
-  created () {
-    firebase.auth().onAuthStateChanged(user => {
+
+  /* created () {
+     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.setLoginUser(user)
+        this.fetchLists()
+        this.lists = this.$store.state.lists;
       } else {
         this.deleteLoginUser()
       }
-    })
-  },
+    }) }, */
+    // var user = firebase.auth().currentUser;
+    //if (user) {
+      //this.setLoginUser(user)
+    //} else {
+      //this.deleteLoginUser()
+    //} 
+  //},
   computed: {
     ...mapGetters([
       "userName", "photoURL"]),
-    ...mapState([
+    /* ...mapState([
       'lists',
-    ]),
+    ]), */
     totalCardCount() {
       return this.$store.getters.totalCardCount
     },
   },
   methods: {
-    show() {
-      this.$modal.show("user-modal")
-    },
-    hide() {
-      this.$modal.hide("user-modal")
-    },
-    showModal() {
-      this.$modal.show('user-modal');
-    },
-    ...mapActions(["login", "logout", "setLoginUser", "deleteLoginUser"]),
+
+    ...mapActions(["login", "logout", "setLoginUser", "deleteLoginUser", "fetchLists"]),
   },
 }
 
